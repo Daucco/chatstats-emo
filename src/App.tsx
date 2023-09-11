@@ -14,9 +14,6 @@ export const App = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Oneliner for binary classification
-    //setPredicted(predictor.predict(postMsg) ? '💀💀' : '😀');
-
     // Takes raw message string as input
     prediction = predictor.predict(postMsg);
 
