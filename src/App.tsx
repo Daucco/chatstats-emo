@@ -31,7 +31,7 @@ export const App = () => {
 
   return (
     <div>
-      <h1>Sentiment analizer</h1>
+      <h1>Sentiment analyzer</h1>
       <p>Labels: {labels.join(', ')}</p>
 
       <form method="post" onSubmit={handleSubmit}>
