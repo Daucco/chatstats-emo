@@ -1,5 +1,5 @@
 export class Vectorizer {
-  // NOTE: Any proccessing operation must match that of the imported vectorizer
+  // NOTE: Any processing operation must match that of the imported vectorizer
   private punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
   private words: string[];
 
@@ -17,7 +17,9 @@ export class Vectorizer {
       .map((i) => i.toLowerCase())
       .filter((i) => i.length); // Skips empty words
 
-    // Maps words to vector form.
+    // TODO: Implement actual NLP ops (train the baseline models again!)
+
+    // Maps words to vector form
     // Count vectorize approach:
     // Replaces corresponding word in vector with the number of occurrences in the message
     const vector = this.words.map(

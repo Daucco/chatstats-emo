@@ -24,8 +24,6 @@ export class Predictor {
   // Returns predicted class
   predict(msg: string): number {
     const vector = this.vectorizer.transform(msg);
-    //return this.logReg.predict(vector) === 1;
-
     return this.logReg.predict(vector);
   }
 }
