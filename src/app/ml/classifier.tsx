@@ -1,4 +1,5 @@
 import { Parameters } from './parameters';
+// TODO: TFJS
 
 export class LogisticRegression {
   classes: number[];
