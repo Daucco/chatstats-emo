@@ -2,6 +2,7 @@ import { Predictor } from './app/ml/predictor';
 import { useState } from 'react';
 
 import './style.css';
+import * as tf from '@tensorflow/tfjs';
 
 export const App = () => {
   const [postMsg, setMsg] = useState('Write something awesome! :D'),
