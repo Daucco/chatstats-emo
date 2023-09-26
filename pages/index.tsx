@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
+import Head from 'next/head';
+import styles from '@/styles/Home.module.css';
 import { useState, useEffect } from 'react';
 
 import MsgBox from '@/components/msgbox';
@@ -18,7 +18,8 @@ import vocab from '../components/ml/models/tokenizer-vocab.json';
 export default function Home() {
   const [message, setMessage] = useState('Write something awesome! :D'),
         [predictor, setPredictor] = useState<Predictor | null>(null),
-        [predicted, setPredicted] = useState('');
+        [sentiment, setSentiment] = useState<string>(''),
+        [label, setLabel] = useState<number>();
 
   // Might be useful to declare tokenizer & vectorizer here, and then give them as arguments to Predictor
   //  allows more flexibility (eg, different tokenizers for different inputs, ...)
@@ -47,55 +48,59 @@ export default function Home() {
   // NOTE: predict method returns a list of prediction, one for each specified doc
   //  This is a dummy example, and there's only a single doc (the message)
   //let prediction: number[], sentiment: string;
-  let prob: number, sentiment: string;
+  let prob: number, sent: string, lab: number;
 
   function triggerPrediction(){
     // Raw message string as input
     if(predictor != null){
       prob = predictor.predict([message])[0];
+      lab = Math.round(prob);
 
       // TODO: Handle multiple outputs
       // Handles prediction result
-      switch (Math.round(prob)) {
+      switch (lab) {
         case 0:
-          sentiment = '💀💀';
+          sent = '💀💀';
           break;
         default:
-          sentiment = '😀';
+          sent = '😀';
           break;
       }
 
       console.log(prob);
       
       // TODO: Hide predicted until there's a result
-      setPredicted(sentiment);
+      setSentiment(sent);
+      setLabel(lab);
     }
     else{
-      setPredicted("Have a cow");
+      setSentiment("Have a cow");
+      setLabel(-1);
     }
   }
+  let dummy = true;
 
   return (
     <>
       <Head>
         <title>Chatstast - EMO module</title>
+        <link rel="icon" href="favicon.svg" />
         <meta name="description" content="Barebones sentiment analyzer." />
       </Head>
 
-      <main className={styles.main}>
-        <h1>
-          Sentiment analyzer
-        </h1>
+      <main className={`${styles.main} ${label == 1 ? "sent_pos" : "sent_neg"}`}>
+        <h1>Sentiment analyzer<span className={styles.blink}>_</span></h1>
 
         <MsgBox
           message={message}
           setMessage={setMessage}
+          className={styles.msgbox}
         />
-        <button onClick={triggerPrediction}>
+        <button onClick={triggerPrediction} className={`${styles.submitButton} ${label == 1 ? styles.submitButton_sent_pos: styles.submitButton_sent_neg}`}>
           How do you feel?
         </button>
 
-        <p>Sentiment: {predicted}</p>
+        <span>{sentiment}</span>
       </main>
     </>
   )

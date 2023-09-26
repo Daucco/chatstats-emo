@@ -1,4 +1,4 @@
-const MsgBox = ({message, setMessage}: any) => {
+const MsgBox = ({message, setMessage, className}: any) => {
     /*const [postMsg, setMsg] = useState("Write something awesome! :D");*/
     
     return (
@@ -7,6 +7,7 @@ const MsgBox = ({message, setMessage}: any) => {
             cols={30}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            className={className}
         />
     );
 };
