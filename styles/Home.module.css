@@ -10,6 +10,7 @@
 .main h1{
   color: whitesmoke;
   text-shadow: 0 0 8px rgba(0,0,0,.5);
+  text-align: center;
 }
 
 .main h1 .blink{
@@ -27,7 +28,7 @@
   border-radius: 7px 7px 7px 7px;
   background: whitesmoke;
   border: 0;
-  width: 50%;
+  width: calc(min(60em, 85vw));
   height: calc(min(30vh, 5.5em));
   color: gray;
   -webkit-box-shadow:inset 0 0 0 2px rgba(0,0,0,.15);
